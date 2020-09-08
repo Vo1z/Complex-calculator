@@ -8,30 +8,30 @@ import java.awt.event.ActionListener;
 public class InputButtonListener implements ActionListener
 {
     private String toSend;
-    private DynamicLabel whereToSend;
+    private DynamicLabel placeToSend;
     private ButtType buttType;
 
-    InputButtonListener(String toSend, DynamicLabel whereToSend, ButtType buttType)
+    InputButtonListener(String toSend, DynamicLabel placeToSend, ButtType buttType)
     {
         this.toSend = toSend;
-        this.whereToSend = whereToSend;
+        this.placeToSend = placeToSend;
         this.buttType = buttType;
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (buttType == ButtType.APPEND)
+        if (this.buttType == ButtType.APPEND)
         {
-            whereToSend.appendContent(toSend);
+            this.placeToSend.appendContent(toSend);
         }
-        else if (buttType == ButtType.REPLACE_ALL)
+        else if (this.buttType == ButtType.REPLACE_ALL)
         {
-            whereToSend.replaceContent(toSend);
+            this.placeToSend.replaceContent(toSend);
         }
-        else if (buttType == ButtType.REPLACE_BACK)
+        else if (this.buttType == ButtType.REPLACE_BACK)
         {
-            whereToSend.replaceBack(toSend);
+            this.placeToSend.replaceBack(toSend);
         }
     }
 }

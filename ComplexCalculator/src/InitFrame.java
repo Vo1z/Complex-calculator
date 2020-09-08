@@ -14,13 +14,13 @@ public class InitFrame extends JFrame
     public InitFrame()
     {
         //Assigns fields
-        tabs = new JTabbedPane();
-        firstTabContent = new FirstTabPanel();
-        secondTabContent = new SecondTabPanel();
+        this.tabs = new JTabbedPane();
+        this.firstTabContent = new FirstTabPanel();
+        this.secondTabContent = new SecondTabPanel();
 
         //Configurations
-        tabs.addTab("Calculator", null, firstTabContent, "");
-        tabs.addTab("Graphs", null, secondTabContent, "");
+        this.tabs.addTab("Calculator", null, this.firstTabContent, "");
+        this.tabs.addTab("Graphs", null, this.secondTabContent, "");
 
         //Frame properties
         this.setSize(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
@@ -31,7 +31,7 @@ public class InitFrame extends JFrame
         this.setVisible(true);
 
         //Frame elements
-        this.add(tabs);
-        this.pack();//TODO read documentation
+        this.add(this.tabs);
+        this.pack();
     }
 }

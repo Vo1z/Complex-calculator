@@ -14,29 +14,29 @@ public class DynamicLabel extends JLabel
 
     public void replaceContent(String contentToReplace)
     {
-        content = contentToReplace;
-        this.setText(content);
+        this.content = contentToReplace;
+        this.setText(this.content);
     }
 
     public void appendContent(String contentToAppend)
     {
-        content += contentToAppend;
-        this.setText(content);
+        this.content += contentToAppend;
+        this.setText(this.content);
     }
 
     public void replaceBack(String contentToReplace)
     {
-        if (content.length() > 0)
+        if (this.content.length() > 0)
         {
-            content = content.substring(0, content.length() - 1);
-            content += contentToReplace;
-            this.setText(content);
+            this.content = this.content.substring(0, this.content.length() - 1);
+            this.content += contentToReplace;
+            this.setText(this.content);
         }
     }
 
     //Getters
     public String getContent()
     {
-        return content;
+        return this.content;
     }
 }

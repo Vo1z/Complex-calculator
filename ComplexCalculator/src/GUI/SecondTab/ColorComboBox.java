@@ -1,6 +1,5 @@
 package GUI.SecondTab;
 
-import CalcMath.Function;
 import ConstsExceptionsEnums.Const;
 
 import javax.swing.*;
@@ -9,11 +8,10 @@ import java.awt.*;
 public class ColorComboBox extends JComboBox<String>
 {
     String[] colors;
-    Function fun;
 
     ColorComboBox()
     {
-        colors = new String[] {"Red", "Green", "Blue", "Yellow", "Cyan", "Magenta", "Orange"};
+        this.colors = new String[] {"Red", "Green", "Blue", "Yellow", "Cyan", "Magenta", "Orange"};
 
         this.setBackground(Const.BUTT_COLOR);
         this.setBorder(BorderFactory.createLineBorder(Const.BUTT_BORDER_COLOR, Const.BUTT_BORDER_THICKNESS));
@@ -25,7 +23,7 @@ public class ColorComboBox extends JComboBox<String>
 
     private void setColors()
     {
-        for (String color : colors)
+        for (String color : this.colors)
         {
             this.addItem(color);
         }

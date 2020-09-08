@@ -1,4 +1,4 @@
-package CalcMath;
+package ConstsExceptionsEnums;
 
 public enum SystemType
 {

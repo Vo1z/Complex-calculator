@@ -1,6 +1,7 @@
 package CalcMath;
 
 import ConstsExceptionsEnums.IncorrectSpellException;
+import ConstsExceptionsEnums.SystemType;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -19,87 +19,87 @@ public class Polynomial
         double modifiedNumber = 0;
         double result = 0;
 
-        while (operationsBuffer.size() > 0)
+        while (this.operationsBuffer.size() > 0)
         {
-            while(operationsBuffer.contains("SQRT:"))
+            while(this.operationsBuffer.contains("SQRT:"))
             {
-                operationIndex = operationsBuffer.indexOf("SQRT:");
-                modifiedNumber = Math.sqrt(numbersBuffer.get(operationIndex));
+                operationIndex = this.operationsBuffer.indexOf("SQRT:");
+                modifiedNumber = Math.sqrt(this.numbersBuffer.get(operationIndex));
 
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("^"))
+            while(this.operationsBuffer.contains("^"))
             {
-                operationIndex = operationsBuffer.indexOf("^");
-                modifiedNumber = Math.pow(numbersBuffer.get(operationIndex), numbersBuffer.get(operationIndex + 1));
+                operationIndex = this.operationsBuffer.indexOf("^");
+                modifiedNumber = Math.pow(this.numbersBuffer.get(operationIndex), this.numbersBuffer.get(operationIndex + 1));
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("%"))
+            while(this.operationsBuffer.contains("%"))
             {
-                operationIndex = operationsBuffer.indexOf("%");
-                modifiedNumber = numbersBuffer.get(operationIndex) / 100;
+                operationIndex = this.operationsBuffer.indexOf("%");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) / 100;
 
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("*"))
+            while(this.operationsBuffer.contains("*"))
             {
-                operationIndex = operationsBuffer.indexOf("*");
-                modifiedNumber = numbersBuffer.get(operationIndex) * numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("*");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) * this.numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("/"))
+            while(this.operationsBuffer.contains("/"))
             {
-                operationIndex = operationsBuffer.indexOf("/");
-                modifiedNumber = numbersBuffer.get(operationIndex) / numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("/");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) / this.numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("+"))
+            while(this.operationsBuffer.contains("+"))
             {
-                operationIndex = operationsBuffer.indexOf("+");
-                modifiedNumber = numbersBuffer.get(operationIndex) + numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("+");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) + this.numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
             while(operationsBuffer.contains("-"))
             {
-                operationIndex = operationsBuffer.indexOf("-");
-                modifiedNumber = numbersBuffer.get(operationIndex) - numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("-");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) - this.numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
         }
 
-        if(numbersBuffer.size() > 0)
+        if(this.numbersBuffer.size() > 0)
         {
-            result = numbersBuffer.get(0);
+            result = this.numbersBuffer.get(0);
         }
 
         return result;

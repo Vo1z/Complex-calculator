@@ -17,15 +17,14 @@ public class FunctionControlLine extends JPanel
     private ColorComboBox colorComboBox;
     private JButton minusButton;
 
-    FunctionControlLine(Function function, String title, SecondTabPanel tabPanel, int index)
-    {
+    FunctionControlLine(Function function, String title, SecondTabPanel tabPanel, int index) {
         this.function = function;
         this.title = title;
         this.tabPanel = tabPanel;
         this.index = index;
-        colorComboBox = new ColorComboBox();
-        checkBox = createCheckBox();
-        minusButton = createMinusButton();
+        this.colorComboBox = new ColorComboBox();
+        this.checkBox = createCheckBox();
+        this.minusButton = createMinusButton();
 
         //FunctionControlLine configuration
         this.setBackground(Const.BUTT_COLOR);
@@ -34,30 +33,26 @@ public class FunctionControlLine extends JPanel
         this.setVisible(true);
 
         //Adding to panel
-        this.add(checkBox);
-        this.add(colorComboBox);
-        this.add(minusButton);
+        this.add(this.checkBox);
+        this.add(this.colorComboBox);
+        this.add(this.minusButton);
 
         Thread checker = new Thread(
-                ()->
+                () ->
                 {
-                    while(!Thread.currentThread().isInterrupted())
-                    {
+                    while (!Thread.currentThread().isInterrupted()) {
                         //Thread sleeps for 500 ms
-                        try
-                        {
+                        try {
                             Thread.sleep(500);
-                        }
-                        catch (InterruptedException e)
-                        {
+                        } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
 
-                        function.setVisible(checkBox.isSelected());
-                        function.setFuncColor(colorComboBox.getSelectedColor());
+                        function.setVisible(this.checkBox.isSelected());
+                        function.setFuncColor(this.colorComboBox.getSelectedColor());
                     }
                 }
-                );
+        );
         checker.start();
     }
 
@@ -66,7 +61,7 @@ public class FunctionControlLine extends JPanel
         JCheckBox createdCheckBox = new JCheckBox(title);
 
         createdCheckBox.setSelected(true);
-        function.setVisible(createdCheckBox.isSelected());
+        this.function.setVisible(createdCheckBox.isSelected());
 
         return createdCheckBox;
     }
@@ -78,19 +73,8 @@ public class FunctionControlLine extends JPanel
         minusButton.setBackground(Const.BUTT_COLOR);
         minusButton.setBorder(BorderFactory.createLineBorder(Const.BUTT_BORDER_COLOR, Const.BUTT_BORDER_THICKNESS));
 
-        minusButton.addActionListener(
-                (event)->
-                {
-                    tabPanel.removeFunction(index);
-                }
-                );
+        minusButton.addActionListener((event)-> this.tabPanel.removeFunction(index));
 
         return minusButton;
-    }
-
-    //Getters
-    public int getIndex()
-    {
-        return index;
     }
 }

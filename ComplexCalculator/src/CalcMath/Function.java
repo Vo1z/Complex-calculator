@@ -40,7 +40,7 @@ public class Function
     {
         for (int i = x1; i < x2; i++)
         {
-            dots.add(new int[]{i, calculateResult(i)});
+            this.dots.add(new int[]{i, calculateResult(i)});
         }
     }
 
@@ -50,6 +50,7 @@ public class Function
 
         int operationIndex = 0;
         int modifiedNumber = 0;
+        int result = 0;
 
         while (operationsBuffer.size() > 0)
         {
@@ -58,9 +59,9 @@ public class Function
                 operationIndex = operationsBuffer.indexOf("SQRT:");
                 modifiedNumber = (int)Math.round(Math.sqrt(numbersBuffer.get(operationIndex)));
 
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
             while(operationsBuffer.contains("^"))
@@ -68,93 +69,98 @@ public class Function
                 operationIndex = operationsBuffer.indexOf("^");
                 modifiedNumber = (int)Math.round(Math.pow(numbersBuffer.get(operationIndex), numbersBuffer.get(operationIndex + 1)));
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
             while(operationsBuffer.contains("%"))
             {
-                operationIndex = operationsBuffer.indexOf("%");
-                modifiedNumber = numbersBuffer.get(operationIndex) / 100;
+                operationIndex = this.operationsBuffer.indexOf("%");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) / 100;
 
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("*"))
+            while(this.operationsBuffer.contains("*"))
             {
-                operationIndex = operationsBuffer.indexOf("*");
-                modifiedNumber = numbersBuffer.get(operationIndex) * numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("*");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) * this.numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
             while(operationsBuffer.contains("/"))
             {
-                operationIndex = operationsBuffer.indexOf("/");
-                modifiedNumber = numbersBuffer.get(operationIndex) / numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("/");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) / numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("+"))
+            while(this.operationsBuffer.contains("+"))
             {
-                operationIndex = operationsBuffer.indexOf("+");
-                modifiedNumber = numbersBuffer.get(operationIndex) + numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("+");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) + numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
 
-            while(operationsBuffer.contains("-"))
+            while(this.operationsBuffer.contains("-"))
             {
-                operationIndex = operationsBuffer.indexOf("-");
-                modifiedNumber = numbersBuffer.get(operationIndex) - numbersBuffer.get(operationIndex + 1);
+                operationIndex = this.operationsBuffer.indexOf("-");
+                modifiedNumber = this.numbersBuffer.get(operationIndex) - this.numbersBuffer.get(operationIndex + 1);
 
-                numbersBuffer.remove(operationIndex + 1);
-                numbersBuffer.remove(operationIndex);
-                numbersBuffer.add(operationIndex, modifiedNumber);
-                operationsBuffer.remove(operationIndex);
+                this.numbersBuffer.remove(operationIndex + 1);
+                this.numbersBuffer.remove(operationIndex);
+                this.numbersBuffer.add(operationIndex, modifiedNumber);
+                this.operationsBuffer.remove(operationIndex);
             }
         }
 
-        return -numbersBuffer.get(0);
+        if (this.numbersBuffer.size() > 0)
+        {
+            result = -this.numbersBuffer.get(0);
+        }
+
+        return result;
     }
 
     private void assignX(int x)
     {
-        numbersBuffer = new ArrayList<>();
-        operationsBuffer = new ArrayList<>(operationsBufferCopy);
+        this.numbersBuffer = new ArrayList<>();
+        this.operationsBuffer = new ArrayList<>(operationsBufferCopy);
 
-        for(String var : varBuffer)
+        for(String var : this.varBuffer)
         {
             if (var.contains("x"))
             {
-                numbersBuffer.add(x);
+                this.numbersBuffer.add(x);
             }
             else
             {
-                numbersBuffer.add(Integer.parseInt(var));
+                this.numbersBuffer.add(Integer.parseInt(var));
             }
         }
     }
 
     public void draw(Graphics g)
     {
-        if(isVisible)
+        if(this.isVisible)
         {
-            g.setColor(funcColor);
+            g.setColor(this.funcColor);
         }
         else
         {
@@ -164,8 +170,8 @@ public class Function
         {
             try
             {
-                g.drawLine(dots.get(i)[0] + drawingPanelWidth/2, dots.get(i)[1] + drawingPanelHeight/2,
-                           dots.get(i + 1)[0] + drawingPanelWidth/2, dots.get(i + 1)[1]+drawingPanelHeight/2);
+                g.drawLine(this.dots.get(i)[0] + this.drawingPanelWidth/2, dots.get(i)[1] + this.drawingPanelHeight/2,
+                        this.dots.get(i + 1)[0] + this.drawingPanelWidth/2, dots.get(i + 1)[1] + this.drawingPanelHeight/2);
             }
             catch (IndexOutOfBoundsException e)
             {

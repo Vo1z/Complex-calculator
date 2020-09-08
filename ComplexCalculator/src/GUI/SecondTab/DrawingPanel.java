@@ -47,7 +47,7 @@ public class DrawingPanel extends JPanel
     @Override
     public void paint(Graphics g)
     {
-        for(Function func : functions)
+        for(Function func : this.functions)
         {
             func.draw(g);
         }

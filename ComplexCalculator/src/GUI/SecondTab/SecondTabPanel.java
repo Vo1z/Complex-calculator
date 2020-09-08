@@ -23,21 +23,21 @@ public class SecondTabPanel extends JPanel
     public SecondTabPanel()
     {
         //Assign
-        memPanelRows = 0;
-        funcIndex = 0;
-        functions = new ArrayList<>();
-        drawingPanel = new DrawingPanel(functions);
-        memorySection = createMemorySection();
-        plusButton = createPlusButton();
+        this.memPanelRows = 0;
+        this.funcIndex = 0;
+        this.functions = new ArrayList<>();
+        this.drawingPanel = new DrawingPanel(this.functions);
+        this.memorySection = createMemorySection();
+        this.plusButton = createPlusButton();
 
         //Panel Properties
         this.setLayout(new GridLayout(Const.P2_LAYOUT_ROWS, Const.P2_LAYOUT_COLS,
                                       Const.P2_LAYOUT_HSPACE, Const.P2_LAYOUT_VSPACE));
 
         //Adding elements
-        this.add(drawingPanel);
-        this.add(memorySection);
-        this.add(plusButton);
+        this.add(this.drawingPanel);
+        this.add(this.memorySection);
+        this.add(this.plusButton);
 
         //Reassigner
         Thread reassigner = new Thread(
@@ -55,11 +55,11 @@ public class SecondTabPanel extends JPanel
                             e.printStackTrace();
                         }
 
-                        drawingPanel.updateFunctions(functions);
-                        for(Function func : functions)
+                        this.drawingPanel.updateFunctions(this.functions);
+                        for(Function func : this.functions)
                         {
-                            func.setDrawingPanelWidth(drawingPanel.getWidth());
-                            func.setDrawingPanelHeight(drawingPanel.getHeight());
+                            func.setDrawingPanelWidth(this.drawingPanel.getWidth());
+                            func.setDrawingPanelHeight(this.drawingPanel.getHeight());
                         }
                     }
                 }
@@ -69,18 +69,18 @@ public class SecondTabPanel extends JPanel
 
     public void removeFunction(int index)
     {
-        memorySection.remove(index);
-        functions.remove(index);
+        this.memorySection.remove(index);
+        this.functions.remove(index);
 
-        funcIndex--;
+        this.funcIndex--;
 
         //Refreshes memory panel
-        memorySection.setVisible(false);
-        memorySection.setVisible(true);
+        this.memorySection.setVisible(false);
+        this.memorySection.setVisible(true);
 
         //Refreshes drawing panel
-        drawingPanel.setVisible(false);
-        drawingPanel.setVisible(true);
+        this.drawingPanel.setVisible(false);
+        this.drawingPanel.setVisible(true);
     }
 
     //Customize MemorySection here
@@ -89,7 +89,7 @@ public class SecondTabPanel extends JPanel
         JPanel memorySection = new JPanel();
 
         //MemorySection properties
-        memorySection.setLayout(new GridLayout(memPanelRows, Const.P2_MEMPANEL_COLS,
+        memorySection.setLayout(new GridLayout(this.memPanelRows, Const.P2_MEMPANEL_COLS,
                                      Const.P2_MEMPANEL_HGAP, Const.P2_MEMPANEL_VGAP));
         memorySection.setBackground(Const.BUTT_COLOR);
         memorySection.setBorder(BorderFactory.createLineBorder(Const.BUTT_BORDER_COLOR, Const.BUTT_BORDER_THICKNESS));
@@ -124,19 +124,19 @@ public class SecondTabPanel extends JPanel
     private void addFunction(String equation) throws IncorrectSpellException
     {
         Function createdFunction = Interpreter.createFunction(equation, Color.black,
-                                                              -500, drawingPanel.getWidth() + 500);
-        functions.add(createdFunction);
-        drawingPanel.updateFunctions(functions);
+                                                              -500, this.drawingPanel.getWidth() + 500);
+        this.functions.add(createdFunction);
+        this.drawingPanel.updateFunctions(this.functions);
 
-        memorySection.add(new FunctionControlLine(createdFunction, equation, this, funcIndex), funcIndex);
-        funcIndex++;
+        this.memorySection.add(new FunctionControlLine(createdFunction, equation, this, this.funcIndex), this.funcIndex);
+        this.funcIndex++;
 
         //Refreshes memory panel
-        memorySection.setVisible(false);
-        memorySection.setVisible(true);
+        this.memorySection.setVisible(false);
+        this.memorySection.setVisible(true);
 
         //Refreshes drawing panel
-        drawingPanel.setVisible(false);
-        drawingPanel.setVisible(true);
+        this.drawingPanel.setVisible(false);
+        this.drawingPanel.setVisible(true);
     }
 }

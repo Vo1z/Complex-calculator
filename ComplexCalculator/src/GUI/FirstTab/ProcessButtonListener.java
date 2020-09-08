@@ -2,7 +2,7 @@ package GUI.FirstTab;
 
 import CalcMath.Interpreter;
 import CalcMath.Polynomial;
-import CalcMath.SystemType;
+import ConstsExceptionsEnums.SystemType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
