@@ -40,7 +40,10 @@ public class Function
     {
         for (int i = x1; i < x2; i++)
         {
-            this.dots.add(new int[]{i, calculateResult(i)});
+            if (i != 0)
+            {
+                this.dots.add(new int[]{i, calculateResult(i)});
+            }
         }
     }
 
